@@ -1,4 +1,4 @@
-import { bookedAppointments, addAppointment } from "@/utils/global";
+import { addAppointment, bookedAppointments } from "@/utils/function";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

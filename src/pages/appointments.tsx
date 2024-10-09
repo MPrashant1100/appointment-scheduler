@@ -1,16 +1,16 @@
-import AppointmentScheduler from "@/components/AppointmentScheduler";
+import AppointmentList from "@/components/AppointmentList";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import React from "react";
 
-const Home = () => {
+const AppointmentListPage = () => {
   return (
     <React.Fragment>
       <Header />
-      <AppointmentScheduler />
+      <AppointmentList />
       <Footer />
     </React.Fragment>
   );
 };
 
-export default Home;
+export default AppointmentListPage;

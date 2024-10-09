@@ -11,6 +11,7 @@ export interface SlotCardProps {
   slot: string;
   isSelected: boolean;
   onClick: () => void;
+  isBooked: boolean;
 };
 
 export interface AppointmentFormProps {

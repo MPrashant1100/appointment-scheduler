@@ -3,18 +3,20 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import SlotCard from "./SlotCard";
 import AppointmentForm from "./AppointmentForm";
-import { Slot } from "@/utils/global";
+import { Appointment, Slot } from "@/utils/global";
 
 const AppointmentScheduler = () => {
   const [selectedDate, setSelectedDate] = useState<string>(
     new Date().toISOString().split("T")[0]
   );
   const [availableSlots, setAvailableSlots] = useState<Slot[]>([]);
+  const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     fetchSlots();
+    fetchBookedAppointments();
   }, [selectedDate]);
 
   const fetchSlots = async () => {
@@ -26,8 +28,23 @@ const AppointmentScheduler = () => {
     }
   };
 
+  const fetchBookedAppointments = async () => {
+    try {
+      const bookedAppointment = await axios.get(
+        `/api/appointments?date=${selectedDate}`
+      );
+      const bookedSlots = bookedAppointment.data.map(
+        (appointment: Appointment) => appointment.slot
+      );
+      setBookedSlots(bookedSlots);
+    } catch (error) {
+      console.error("Error fetching booked appointments:", error);
+    }
+  };
+
   const handleBookingSuccess = () => {
     fetchSlots();
+    fetchBookedAppointments()
     setSelectedSlot(null);
   };
 
@@ -65,6 +82,7 @@ const AppointmentScheduler = () => {
                   key={slot}
                   slot={slot}
                   isSelected={selectedSlot === slot}
+                  isBooked={bookedSlots.includes(slot)}
                   onClick={() => setSelectedSlot(slot)}
                 />
               ))}

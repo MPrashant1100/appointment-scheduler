@@ -2,6 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Appointment, bookedAppointments } from "@/utils/global";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
+
   const { date } = req.query;
 
   if (!date) {

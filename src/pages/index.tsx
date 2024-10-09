@@ -1,5 +1,7 @@
 import AppointmentScheduler from "@/components/AppointmentScheduler";
 
-export default function Home() {
-  return <AppointmentScheduler />
-}
+const Home = () => {
+  return <AppointmentScheduler />;
+};
+
+export default Home;

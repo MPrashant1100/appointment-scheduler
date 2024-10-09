@@ -1,4 +1,4 @@
-import { generateSlots } from "@/utils/global";
+import { generateSlots } from "@/utils/function";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
